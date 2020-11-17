@@ -3,7 +3,6 @@ import dask.core
 import dask.local
 from queue import Empty, Queue
 import threading
-from lithops import FunctionExecutor
 
 
 # Idea is to have a queue of function calls to be processed in batches by an
@@ -120,7 +119,7 @@ class PywrenExecutor(object):
         the Pywren executor    
     """
 
-    def __init__(self, pywren_executor: FunctionExecutor):
+    def __init__(self, pywren_executor):
         self.pywren_executor = pywren_executor
 
     def map(self, func, iterables):
