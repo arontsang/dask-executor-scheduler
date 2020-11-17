@@ -1,15 +1,14 @@
 import concurrent.futures
-import dask.array as da
 import dask.core
 import dask.local
-import numpy as np
 from queue import Empty, Queue
 import threading
+from lithops import FunctionExecutor
 
-import pywren_ibm_cloud as pywren
 
 # Idea is to have a queue of function calls to be processed in batches by an
 # concurrent.futures.Executor.
+
 
 class ShutdownSentinel():
     """Put an instance of this class on the queue to shut it down"""
@@ -121,7 +120,7 @@ class PywrenExecutor(object):
         the Pywren executor    
     """
 
-    def __init__(self, pywren_executor):
+    def __init__(self, pywren_executor: FunctionExecutor):
         self.pywren_executor = pywren_executor
 
     def map(self, func, iterables):
